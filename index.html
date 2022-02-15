@@ -26,7 +26,7 @@
   </header>
   <main class="container">
     <div data-view="entry-form">
-      <form>
+      <form class="form">
         <div class="row">
           <div class="column-full">
             <h2>New Entry</h2>
@@ -34,7 +34,7 @@
         </div>
         <div class="row">
           <div class="column-half">
-            <img src="images/placeholder-image-square.jpg" alt="user-input" class="margin-bottom">
+            <img src="images/placeholder-image-square.jpg" onerror="this.src='images/placeholder-image-square.jpg'" alt="user-input" class="margin-bottom">
           </div>
           <div class="column-half">
             <label class="label">Title</label>
@@ -46,7 +46,7 @@
         <div class="row">
           <div class="column-full">
             <label class="label margin-bottom">Notes</label>
-            <textarea class="margin-bottom" rows="10" name="Notes" required></textarea>
+            <textarea class="margin-bottom" id="text-area" rows="10" name="Notes" required></textarea>
           </div>
         </div>
         <div class="row">
