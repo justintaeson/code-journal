@@ -13,6 +13,7 @@ function photoUpdate(event) {
 }
 
 function submitForm(event) {
+  event.preventDefault();
   var formInput = {};
   formInput.title = $title.value;
   formInput.photoURL = $photoURL.value;
@@ -24,5 +25,11 @@ function submitForm(event) {
   $form.reset();
 }
 
+function handleUnload(event) {
+  var newEntry = JSON.stringify(data.entries[0]);
+  localStorage.setItem('javascript-local-storage', newEntry);
+}
+
 $photoURL.addEventListener('input', photoUpdate);
 $form.addEventListener('submit', submitForm);
+window.addEventListener('beforeunload', handleUnload);
