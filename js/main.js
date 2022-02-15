@@ -25,11 +25,5 @@ function submitForm(event) {
   $form.reset();
 }
 
-function handleUnload(event) {
-  var newEntry = JSON.stringify(data.entries[0]);
-  localStorage.setItem('javascript-local-storage', newEntry);
-}
-
 $photoURL.addEventListener('input', photoUpdate);
 $form.addEventListener('submit', submitForm);
-window.addEventListener('beforeunload', handleUnload);
