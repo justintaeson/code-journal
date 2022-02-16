@@ -58,3 +58,36 @@ img {
     width: 50%;
   }
 }
+
+h2 {
+  margin: 1rem 0;
+  padding-right: 1rem;
+}
+
+.flex-direction-column {
+  flex-direction: column;
+}
+
+.new-button {
+  float: right;
+}
+
+.display-flex {
+  display: flex;
+}
+
+p {
+  margin-top: 1.5rem;
+}
+
+.flex-row {
+  flex-direction: column;
+}
+
+.half-width {
+  width: 50%;
+}
+
+.align-items {
+  align-items: center;
+}
