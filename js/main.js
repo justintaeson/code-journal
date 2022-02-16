@@ -6,6 +6,7 @@ var $photoURL = document.querySelector('#photo-url');
 var $form = document.querySelector('.form');
 var $title = document.querySelector('#title');
 var $textArea = document.querySelector('#text-area');
+var $entriesList = document.querySelector('ul');
 
 function photoUpdate(event) {
   var photoLink = event.target.value;
@@ -25,5 +26,39 @@ function submitForm(event) {
   $form.reset();
 }
 
+function renderEntry(entry) {
+  var $unorderedList = document.createElement('ul');
+
+  var $outerDiv = document.createElement('div');
+  $outerDiv.className = 'row';
+  $unorderedList.appendChild($outerDiv);
+
+  var $innerDiv = document.createElement('div');
+  $innerDiv.className = 'column-half';
+  $outerDiv.appendChild($innerDiv);
+
+  var $secondInnerDiv = document.createElement('div');
+  $secondInnerDiv.className = 'column-half';
+  $outerDiv.appendChild($secondInnerDiv);
+
+  var $img = document.createElement('img');
+  $img.setAttribute = entry.photoURL;
+  $innerDiv.appendChild($img);
+
+  var $h2 = document.createElement('h2');
+  var $h2Text = document.createTextNode(entry.notes);
+  $h2.appendChild($h2Text);
+  $secondInnerDiv.appendChild($h2);
+
+  return $unorderedList;
+}
+
+function loadedDOMContent(event) {
+  for (var i = 0; i < data.entries.length; i++) {
+    $entriesList.append(renderEntry(data.entries[i]));
+  }
+}
+
 $photoURL.addEventListener('input', photoUpdate);
 $form.addEventListener('submit', submitForm);
+document.addEventListener('DOMContentLoaded', loadedDOMContent);
