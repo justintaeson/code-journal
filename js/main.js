@@ -30,7 +30,7 @@ function renderEntry(entry) {
   var $unorderedList = document.createElement('ul');
 
   var $outerDiv = document.createElement('div');
-  $outerDiv.className = 'row';
+  $outerDiv.className = 'row margin-top';
   $unorderedList.appendChild($outerDiv);
 
   var $innerDiv = document.createElement('div');
