@@ -1,0 +1,55 @@
+.font-family {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.background {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(240, 240, 240);
+}
+
+.full-width {
+  left: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  max-width: 100vw;
+  position: relative;
+  right: 50%;
+  width: 100vw;
+  background-color: rgb(86, 43, 129);
+}
+
+p {
+  color: white;
+}
+
+.button {
+  color: white;
+  background-color: rgb(86, 43, 129);
+  border-radius: 5px;
+  border: none;
+  padding: 0.5rem 1rem;
+}
+
+input {
+  width: 100%;
+  border-radius: 3px;
+  border-width: 2px;
+  border-color: rgb(211, 211, 211);
+  margin: 0.5rem 0;
+  border-style: solid;
+  text-indent: 5px;
+}
+
+textarea {
+  width: 100%;
+  text-align: left;
+  border-radius: 3px;
+  border-width: 2px;
+  border-color: rgb(211, 211, 211);
+  margin: 0.5rem 0;
+  border-style: solid;
+  vertical-align: text-top;
+  text-indent: 5px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}

@@ -14,10 +14,49 @@
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
+<body class="background font-family">
   <header>
+    <div class="container">
+      <div class="row">
+        <div class="column-full">
+          <p>Code Journal</p>
+        </div>
+      </div>
+    </div>
   </header>
-  <main>
+  <main class="container">
+    <div data-view="entry-form">
+      <form class="form">
+        <div class="row">
+          <div class="column-full">
+            <h2>New Entry</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column-half">
+            <img src="images/placeholder-image-square.jpg" onerror="this.src='images/placeholder-image-square.jpg'" alt="user-input" class="margin-bottom">
+          </div>
+          <div class="column-half">
+            <label class="label">Title</label>
+            <input class="margin-bottom" id="title" type="text" name="title" required>
+            <label class="label">Photo URL</label>
+            <input class="margin-bottom" id="photo-url" type="text" name="Photo URL" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column-full">
+            <label class="label margin-bottom">Notes</label>
+            <textarea class="margin-bottom" id="text-area" rows="10" name="Notes" required></textarea>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column-full text-right">
+            <button class="button">SAVE</button>
+          </div>
+        </div>
+      </form>
+
+    </div>
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
