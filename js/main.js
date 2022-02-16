@@ -42,13 +42,18 @@ function renderEntry(entry) {
   $outerDiv.appendChild($secondInnerDiv);
 
   var $img = document.createElement('img');
-  $img.setAttribute = entry.photoURL;
+  $img.setAttribute('src', entry.photoURL);
   $innerDiv.appendChild($img);
 
   var $h2 = document.createElement('h2');
-  var $h2Text = document.createTextNode(entry.notes);
+  var $h2Text = document.createTextNode(entry.title);
+  var $p = document.createElement('p');
+  $p.className = 'font-sans';
+  var $pText = document.createTextNode(entry.notes);
   $h2.appendChild($h2Text);
+  $p.appendChild($pText);
   $secondInnerDiv.appendChild($h2);
+  $secondInnerDiv.appendChild($p);
 
   return $unorderedList;
 }
