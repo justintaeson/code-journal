@@ -91,3 +91,12 @@ p {
 .align-items {
   align-items: center;
 }
+
+.font-sans {
+  font-family: sans-serif;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
