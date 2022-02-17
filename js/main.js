@@ -70,6 +70,7 @@ function renderEntry(entry) {
   $rowHalf.appendChild($editIcon);
   $secondInnerDiv.appendChild($p);
 
+  $unorderedList.setAttribute('data-entry-id', entry.nextEntryId);
   return $unorderedList;
 }
 
