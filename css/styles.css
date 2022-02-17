@@ -19,10 +19,6 @@
   background-color: rgb(86, 43, 129);
 }
 
-p {
-  color: white;
-}
-
 .button {
   color: white;
   background-color: rgb(86, 43, 129);
@@ -52,4 +48,12 @@ textarea {
   vertical-align: text-top;
   text-indent: 5px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+a {
+  color: white;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }

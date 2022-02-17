@@ -15,17 +15,24 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body class="background font-family">
+
   <header>
     <div class="container">
       <div class="row">
-        <div class="column-full">
-          <p>Code Journal</p>
+        <div class="column-full display-flex">
+          <h2>Code Journal</h2>
+          <nav>
+            <a href="#" style="text-decoration: none">
+              <p class="entries-button">Entries</p>
+            </a>
+          </nav>
         </div>
       </div>
     </div>
   </header>
+
   <main class="container">
-    <div data-view="entry-form">
+    <div data-view="entry-form" class="entry-form hidden">
       <form class="form">
         <div class="row">
           <div class="column-full">
@@ -51,12 +58,23 @@
         </div>
         <div class="row">
           <div class="column-full text-right">
-            <button class="button">SAVE</button>
+            <button class="save-button button cursor-pointer">SAVE</button>
           </div>
         </div>
       </form>
-
     </div>
+    <div class="entries" data-view="entries">
+      <div class="row align-items">
+        <div class="column-half half-width">
+          <h2>Entries</h2>
+        </div>
+        <div class="column-half half-width">
+          <a href="#" style="text-decoration:none">
+            <div class="new-button float-right button cursor-pointer">NEW</div>
+          </a>
+        </div>
+      </div>
+      <ul></ul>
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
