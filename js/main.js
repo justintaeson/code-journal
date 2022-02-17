@@ -92,10 +92,25 @@ function showEntries(event) {
   $entries.className = 'entries';
   data.view = 'entries';
 }
+function getObject($unorderedList) {
+  var entryID = $unorderedList.getAttribute('data-entry-ID');
+  for (let i = 0; i < data.entries.length; i++) {
+    if (entryID === data.entries[i].entryID) {
+      var entryObject = data.entries[i];
+      data.editing = $unorderedList;
+      return entryObject;
+    }
+  }
+}
+
 function editEntry(event) {
   showEntryForm();
 
-  $unorderedList.getAttribute('data-entry-ID');
+  var entryObject = getObject($unorderedList);
+  $title.value = entryObject.title;
+  $photoURL.value = entryObject.photoURL;
+  $img.setAttribute('src', entryObject.photoURL);
+  $textArea.value = entryObject.notes;
 }
 
 if (data.view === 'entry-form') {
