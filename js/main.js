@@ -11,7 +11,7 @@ var $newButton = document.querySelector('.new-button');
 var $entryForm = document.querySelector('.entry-form');
 var $entries = document.querySelector('.entries');
 var $saveButton = document.querySelector('.save-button');
-var $a = document.querySelector('a');
+var $entriesButton = document.querySelector('a');
 
 function photoUpdate(event) {
   var photoLink = event.target.value;
@@ -82,9 +82,14 @@ function showEntries(event) {
   data.view = 'entries';
 }
 
+if (data.view === 'entry-form') {
+  showEntryForm();
+} else {
+  showEntries();
+}
 $photoURL.addEventListener('input', photoUpdate);
 $form.addEventListener('submit', submitForm);
 document.addEventListener('DOMContentLoaded', loadedDOMContent);
 $newButton.addEventListener('click', showEntryForm);
 $saveButton.addEventListener('click', showEntries);
-$a.addEventListener('click', showEntries);
+$entriesButton.addEventListener('click', showEntries);
