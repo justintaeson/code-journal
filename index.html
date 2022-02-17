@@ -32,7 +32,7 @@
   </header>
 
   <main class="container">
-    <div data-view="entry-form">
+    <div data-view="entry-form" class="entry-form hidden">
       <form class="form">
         <div class="row">
           <div class="column-full">
@@ -58,18 +58,18 @@
         </div>
         <div class="row">
           <div class="column-full text-right">
-            <button class="button">SAVE</button>
+            <button class="save-button button cursor-pointer">SAVE</button>
           </div>
         </div>
       </form>
     </div>
-    <div id="entries" data-view="entries">
+    <div class="entries" data-view="entries">
       <div class="row align-items">
         <div class="column-half half-width">
           <h2>Entries</h2>
         </div>
         <div class="column-half half-width">
-          <button class="new-button button">NEW</button>
+          <button class="new-button float-right button cursor-pointer">NEW</button>
         </div>
       </div>
       <ul></ul>

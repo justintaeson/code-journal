@@ -7,6 +7,11 @@ var $form = document.querySelector('.form');
 var $title = document.querySelector('#title');
 var $textArea = document.querySelector('#text-area');
 var $entriesList = document.querySelector('ul');
+var $newButton = document.querySelector('.new-button');
+var $entryForm = document.querySelector('.entry-form');
+var $entries = document.querySelector('.entries');
+var $saveButton = document.querySelector('.save-button');
+var $a = document.querySelector('a');
 
 function photoUpdate(event) {
   var photoLink = event.target.value;
@@ -24,6 +29,7 @@ function submitForm(event) {
   data.entries.unshift(formInput);
   $img.setAttribute('src', 'images/images/placeholder-image-square.jpg');
   $form.reset();
+  $entriesList.prepend(renderEntry(formInput));
 }
 
 function renderEntry(entry) {
@@ -64,6 +70,21 @@ function loadedDOMContent(event) {
   }
 }
 
+function showEntryForm(event) {
+  $entryForm.className = 'entry-form';
+  $entries.className = 'hidden';
+  data.view = 'entry-form';
+}
+
+function showEntries(event) {
+  $entryForm.className = 'hidden';
+  $entries.className = 'entries';
+  data.view = 'entries';
+}
+
 $photoURL.addEventListener('input', photoUpdate);
 $form.addEventListener('submit', submitForm);
 document.addEventListener('DOMContentLoaded', loadedDOMContent);
+$newButton.addEventListener('click', showEntryForm);
+$saveButton.addEventListener('click', showEntries);
+$a.addEventListener('click', showEntries);

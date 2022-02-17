@@ -53,3 +53,7 @@ textarea {
 a {
   color: white;
 }
+
+.cursor-pointer {
+  cursor: pointer;
+}
