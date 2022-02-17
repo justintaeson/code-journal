@@ -51,14 +51,23 @@ function renderEntry(entry) {
   $img.setAttribute('src', entry.photoURL);
   $innerDiv.appendChild($img);
 
+  var $rowHalf = document.createElement('div');
+  $rowHalf.className = 'row align-items';
+  $secondInnerDiv.appendChild($rowHalf);
+
   var $h2 = document.createElement('h2');
+  $h2.className = 'three-quarter-width';
   var $h2Text = document.createTextNode(entry.title);
+  var $editIcon = document.createElement('i');
+  $editIcon.className = 'fa-solid fa-pen-to-square margin-left cursor-pointer';
+
   var $p = document.createElement('p');
   $p.className = 'font-sans';
   var $pText = document.createTextNode(entry.notes);
   $h2.appendChild($h2Text);
   $p.appendChild($pText);
-  $secondInnerDiv.appendChild($h2);
+  $rowHalf.appendChild($h2);
+  $rowHalf.appendChild($editIcon);
   $secondInnerDiv.appendChild($p);
 
   return $unorderedList;
