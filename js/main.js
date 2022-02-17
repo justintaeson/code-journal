@@ -92,6 +92,11 @@ function showEntries(event) {
   $entries.className = 'entries';
   data.view = 'entries';
 }
+function editEntry(event) {
+  showEntryForm();
+
+  $unorderedList.getAttribute('data-entry-ID');
+}
 
 if (data.view === 'entry-form') {
   showEntryForm();
@@ -104,4 +109,4 @@ document.addEventListener('DOMContentLoaded', loadedDOMContent);
 $newButton.addEventListener('click', showEntryForm);
 $saveButton.addEventListener('click', showEntries);
 $entriesButton.addEventListener('click', showEntries);
-$unorderedList.addEventListener('click', showEntryForm);
+$unorderedList.addEventListener('click', editEntry);
