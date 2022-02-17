@@ -12,6 +12,7 @@ var $entryForm = document.querySelector('.entry-form');
 var $entries = document.querySelector('.entries');
 var $saveButton = document.querySelector('.save-button');
 var $entriesButton = document.querySelector('a');
+var $unorderedList = document.querySelector('ul');
 
 function photoUpdate(event) {
   var photoLink = event.target.value;
@@ -103,3 +104,4 @@ document.addEventListener('DOMContentLoaded', loadedDOMContent);
 $newButton.addEventListener('click', showEntryForm);
 $saveButton.addEventListener('click', showEntries);
 $entriesButton.addEventListener('click', showEntries);
+$unorderedList.addEventListener('click', showEntryForm);
