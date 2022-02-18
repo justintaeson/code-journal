@@ -20,16 +20,26 @@ function photoUpdate(event) {
 
 function submitForm(event) {
   event.preventDefault();
-  var formInput = {};
+
+  if (data.editing === null) {
+    var formInput = {};
+    formInput.nextEntryId = data.nextEntryId;
+  } else {
+    var entryListElement = data.editing;
+    formInput = getObject(entryListElement);
+  }
   formInput.title = $title.value;
   formInput.photoURL = $photoURL.value;
   formInput.notes = $textArea.value;
-  formInput.nextEntryId = data.nextEntryId;
-  data.nextEntryId++;
-  data.entries.unshift(formInput);
-  $img.setAttribute('src', 'images/images/placeholder-image-square.jpg');
-  $form.reset();
-  $entriesList.prepend(renderEntry(formInput));
+  var currentEntry = renderEntry(formInput);
+
+  if (data.editing === null) {
+    $entriesList.prepend(renderEntry(formInput));
+    data.nextEntryId++;
+    data.entries.unshift(formInput);
+  } else {
+    entryListElement.replaceWith(currentEntry);
+  }
 }
 
 function renderEntry(entry) {
@@ -86,13 +96,13 @@ function getObject(entryList) {
 
 function editEntry(event) {
   showEntryForm();
-
   var entryListElement = event.target.closest('li');
   var entryObject = getObject(entryListElement);
   $title.value = entryObject.title;
   $photoURL.value = entryObject.photoURL;
   $img.setAttribute('src', entryObject.photoURL);
   $textArea.value = entryObject.notes;
+  data.editing = entryListElement;
 }
 
 function loadedDOMContent(event) {
@@ -105,12 +115,14 @@ function showEntryForm(event) {
   $entryForm.className = 'entry-form';
   $entries.className = 'hidden';
   data.view = 'entry-form';
+  data.editing = null;
 }
 
 function showEntries(event) {
   $entryForm.className = 'hidden';
   $entries.className = 'entries';
   data.view = 'entries';
+  data.editing = 'null';
 }
 
 if (data.view === 'entry-form') {
