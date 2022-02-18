@@ -12,7 +12,6 @@ var $entryForm = document.querySelector('.entry-form');
 var $entries = document.querySelector('.entries');
 var $saveButton = document.querySelector('.save-button');
 var $entriesButton = document.querySelector('a');
-var $unorderedList = document.querySelector('ul');
 
 function photoUpdate(event) {
   var photoLink = event.target.value;
@@ -34,11 +33,11 @@ function submitForm(event) {
 }
 
 function renderEntry(entry) {
-  var $unorderedList = document.createElement('ul');
+  var $entriesList = document.createElement('li');
 
   var $outerDiv = document.createElement('div');
   $outerDiv.className = 'row margin-top';
-  $unorderedList.appendChild($outerDiv);
+  $entriesList.appendChild($outerDiv);
 
   var $innerDiv = document.createElement('div');
   $innerDiv.className = 'column-half';
@@ -71,8 +70,29 @@ function renderEntry(entry) {
   $rowHalf.appendChild($editIcon);
   $secondInnerDiv.appendChild($p);
 
-  $unorderedList.setAttribute('data-entry-id', entry.nextEntryId);
-  return $unorderedList;
+  $entriesList.setAttribute('data-entry-id', entry.nextEntryId);
+  return $entriesList;
+}
+
+function getObject(entryList) {
+  var entryId = entryList.getAttribute('data-entry-id');
+  for (let i = 0; i < data.entries.length; i++) {
+    if (entryId === data.entries[i].nextEntryId.toString()) {
+      var entryObject = data.entries[i];
+      return entryObject;
+    }
+  }
+}
+
+function editEntry(event) {
+  showEntryForm();
+
+  var entryListElement = event.target.closest('li');
+  var entryObject = getObject(entryListElement);
+  $title.value = entryObject.title;
+  $photoURL.value = entryObject.photoURL;
+  $img.setAttribute('src', entryObject.photoURL);
+  $textArea.value = entryObject.notes;
 }
 
 function loadedDOMContent(event) {
@@ -92,26 +112,6 @@ function showEntries(event) {
   $entries.className = 'entries';
   data.view = 'entries';
 }
-function getObject($unorderedList) {
-  var entryID = $unorderedList.getAttribute('data-entry-ID');
-  for (let i = 0; i < data.entries.length; i++) {
-    if (entryID === data.entries[i].entryID) {
-      var entryObject = data.entries[i];
-      data.editing = $unorderedList;
-      return entryObject;
-    }
-  }
-}
-
-function editEntry(event) {
-  showEntryForm();
-
-  var entryObject = getObject($unorderedList);
-  $title.value = entryObject.title;
-  $photoURL.value = entryObject.photoURL;
-  $img.setAttribute('src', entryObject.photoURL);
-  $textArea.value = entryObject.notes;
-}
 
 if (data.view === 'entry-form') {
   showEntryForm();
@@ -124,4 +124,4 @@ document.addEventListener('DOMContentLoaded', loadedDOMContent);
 $newButton.addEventListener('click', showEntryForm);
 $saveButton.addEventListener('click', showEntries);
 $entriesButton.addEventListener('click', showEntries);
-$unorderedList.addEventListener('click', editEntry);
+$entriesList.addEventListener('click', editEntry);
