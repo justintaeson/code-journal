@@ -21,7 +21,7 @@ function photoUpdate(event) {
 function submitForm(event) {
   event.preventDefault();
   var formInput = {};
-  formInput.nextEntryId = data.nextEntryId;
+  formInput.entryId = data.nextEntryId;
   formInput.title = $title.value;
   formInput.photoURL = $photoURL.value;
   formInput.notes = $textArea.value;
@@ -78,7 +78,7 @@ function renderEntry(entry) {
   return $entriesList;
 }
 
-function getObject(entryList) {
+function getEntry(entryList) {
   var entryId = entryList.getAttribute('data-entry-id');
   for (let i = 0; i < data.entries.length; i++) {
     if (entryId === data.entries[i].nextEntryId.toString()) {
@@ -91,7 +91,7 @@ function getObject(entryList) {
 function editEntry(event) { /* when you click on the edit button */
   showEntryForm(); /* show the entry form */
   var entryListElement = event.target.closest('li'); /* entryListElement = grabs the closeest li element which should be the one you selected since it's in the front of the entries */
-  var entryObject = getObject(entryListElement); /* entryObject = the inputs as an object for the current input */
+  var entryObject = getEntry(entryListElement); /* entryObject = the inputs as an object for the current input */
   $title.value = entryObject.title; /* populate the title input with the title that's in the current li element */
   $photoURL.value = entryObject.photoURL; /* populate the photoURL input with the photoURL that's in the current li element */
   $img.setAttribute('src', entryObject.photoURL); /* set the image src to the photoURL in the li element; should show the picture */
@@ -116,7 +116,7 @@ function showEntries(event) {
   $entryForm.className = 'hidden';
   $entries.className = 'entries';
   data.view = 'entries';
-  data.editing = 'null';
+  data.editing = null;
 }
 
 if (data.view === 'entry-form') {
