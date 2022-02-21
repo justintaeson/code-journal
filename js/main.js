@@ -20,25 +20,19 @@ function photoUpdate(event) {
 
 function submitForm(event) {
   event.preventDefault();
-
-  if (data.editing === null) {
-    var formInput = {};
-    formInput.nextEntryId = data.nextEntryId;
-  } else {
-    var entryListElement = data.editing;
-    formInput = getObject(entryListElement);
-  }
+  var formInput = {};
+  formInput.nextEntryId = data.nextEntryId;
   formInput.title = $title.value;
   formInput.photoURL = $photoURL.value;
   formInput.notes = $textArea.value;
-  var currentEntry = renderEntry(formInput);
+  data.nextEntryId++;
+  $entriesList.prepend(renderEntry(formInput));
+  data.entries.unshift(formInput);
+  renderEntry(formInput);
 
-  if (data.editing === null) {
-    $entriesList.prepend(renderEntry(formInput));
-    data.nextEntryId++;
-    data.entries.unshift(formInput);
-  } else {
-    entryListElement.replaceWith(currentEntry);
+  if (data.editing !== null) {
+    var entryListElement = event.target.closest('li');
+    entryListElement.replaceWith(formInput);
   }
 }
 
@@ -94,15 +88,15 @@ function getObject(entryList) {
   }
 }
 
-function editEntry(event) {
-  showEntryForm();
-  var entryListElement = event.target.closest('li');
-  var entryObject = getObject(entryListElement);
-  $title.value = entryObject.title;
-  $photoURL.value = entryObject.photoURL;
-  $img.setAttribute('src', entryObject.photoURL);
-  $textArea.value = entryObject.notes;
-  data.editing = entryListElement;
+function editEntry(event) { /* when you click on the edit button */
+  showEntryForm(); /* show the entry form */
+  var entryListElement = event.target.closest('li'); /* entryListElement = grabs the closeest li element which should be the one you selected since it's in the front of the entries */
+  var entryObject = getObject(entryListElement); /* entryObject = the inputs as an object for the current input */
+  $title.value = entryObject.title; /* populate the title input with the title that's in the current li element */
+  $photoURL.value = entryObject.photoURL; /* populate the photoURL input with the photoURL that's in the current li element */
+  $img.setAttribute('src', entryObject.photoURL); /* set the image src to the photoURL in the li element; should show the picture */
+  $textArea.value = entryObject.notes; /* populate the textArea input with the textArea content that's in the current li element */
+  data.editing = entryListElement; /* set the editing property in our data model to the element */
 }
 
 function loadedDOMContent(event) {
