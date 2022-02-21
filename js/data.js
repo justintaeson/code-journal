@@ -7,7 +7,7 @@ var data = {
   nextEntryId: 1
 };
 
-function handleUnload(event) {
+function beforeLoad(event) {
   var entriesJSON = JSON.stringify(data);
   localStorage.setItem('javascript-local-storage', entriesJSON);
 }
@@ -17,4 +17,4 @@ if (storedData !== null) {
   data = JSON.parse(storedData);
 }
 
-window.addEventListener('beforeunload', handleUnload);
+window.addEventListener('beforeunload', beforeLoad);
