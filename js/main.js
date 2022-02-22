@@ -1,9 +1,8 @@
 /* global data */
 /* exported data */
 
-var $img = document.querySelector('img');
-var $photoURL = document.querySelector('#photo-url');
-var $form = document.querySelector('.form');
+var $img = document.querySelector('img'); // allows us to access the image element
+var $photoURL = document.querySelector('#photo-url'); // allows us to access the input element through its ID 'photo-url'
 var $title = document.querySelector('#title');
 var $textArea = document.querySelector('#text-area');
 var $entriesList = document.querySelector('ul');
@@ -14,30 +13,33 @@ var $saveButton = document.querySelector('.save-button');
 var $entriesButton = document.querySelector('a');
 var $deleteButton = document.querySelector('.delete-button');
 var $cancelButton = document.querySelector('.cancel-button');
-var $submitButton = document.querySelector('.submit-button');
+var $submitButton = document.querySelector('.confirm-button');
 var $modalBackground = document.querySelector('.modal-background');
 
 function photoUpdate(event) {
-  var photoLink = event.target.value;
-  $img.setAttribute('src', photoLink);
+  var photoLink = event.target.value; // gets the value of the closest element; grabs the value of the input in the photo URL box and assign it to the variable photoLink
+  $img.setAttribute('src', photoLink); // set the src attribute of the image element to photoLink (should be a URL of a photo; this will update the image)
 }
 
 function submitForm(event) {
-  event.preventDefault();
-  var formInput = {};
-  formInput.entryId = data.nextEntryId;
-  formInput.title = $title.value;
-  formInput.photoURL = $photoURL.value;
-  formInput.notes = $textArea.value;
-  data.nextEntryId++;
-  $entriesList.prepend(renderEntry(formInput));
-  data.entries.unshift(formInput);
-  renderEntry(formInput);
+  event.preventDefault(); // prevents the default from happening which is to refresh the page for 'submit' event handler
+  var formInput = {}; // variable that creates an empty object to store the user's inputs
+  var domTree = renderEntry(formInput); // variable that creates a DOM tree
 
-  if (data.editing !== null) {
-    var entryListElement = event.target.closest('li');
-    entryListElement.replaceWith(formInput);
+  if (data.editing !== null) { // if this is not a new entry...
+    var entryListElement = event.target.closest('li'); // grab the closest li element of the form element which should be the DOM tree since that's the only li element
+    entryListElement.replaceWith(domTree); //
+  } else {
+    formInput.title = $title.value; // create a title property in the formInput object and give it the value of the user's input for title
+    formInput.photoURL = $photoURL.value; // create a photoURL property in the formInput object and give it the value of the user's input for photoURL
+    formInput.notes = $textArea.value; // create a notes property in the formInput object and give it the value of the user's input for the textArea
+    formInput.entryId = data.nextEntryId; // create a entryID property in the formInput object so we can track what number entry it is
+    data.nextEntryId++; // increment the entryID in our data model so that everytime someone presses submit it automatically updates the entryID
+    $entriesList.prepend(renderEntry(formInput)); // get the entriesList element which is 'ul' and attach the created DOM tree of the user's inputs which was created from the renderEntry function
+    data.entries.unshift(formInput); // throw the user's inputs which is in an object to the front of the entries array in our data model
   }
+
+  showEntries();
 }
 
 function renderEntry(entry) {
@@ -94,8 +96,10 @@ function getEntry(entryList) {
 
 function editEntry(event) { /* when you click on the edit button */
   showEntryForm(); /* show the entry form */
+
   var entryListElement = event.target.closest('li'); /* entryListElement = grabs the closeest li element which should be the one you selected since it's in the front of the entries */
   var entryObject = getEntry(entryListElement); /* entryObject = the inputs as an object for the current input */
+
   $title.value = entryObject.title; /* populate the title input with the title that's in the current li element */
   $photoURL.value = entryObject.photoURL; /* populate the photoURL input with the photoURL that's in the current li element */
   $img.setAttribute('src', entryObject.photoURL); /* set the image src to the photoURL in the li element; should show the picture */
@@ -128,9 +132,16 @@ function cancelModal(event) {
 }
 
 function deleteEntry(event) {
-  data.entries.shift();
+  $modalBackground.className = 'modal-background';
+}
 
+function confirmDelete(event) {
   showEntries();
+
+  var entryListElement = event.target.closest('li');
+
+  document.removeChild(entryListElement);
+
 }
 
 if (data.view === 'entry-form') {
@@ -138,13 +149,12 @@ if (data.view === 'entry-form') {
 } else {
   showEntries();
 }
-$photoURL.addEventListener('input', photoUpdate);
-$form.addEventListener('submit', submitForm);
+$photoURL.addEventListener('input', photoUpdate); // for the input element with an ID of photoURL, whenever someone puts an input in, run the photoUpdate function
+$saveButton.addEventListener('submit', submitForm); // listen for when someone clicks on the submit entry button on the button element, when someone submits - run the submitForm function
 document.addEventListener('DOMContentLoaded', loadedDOMContent);
 $newButton.addEventListener('click', showEntryForm);
-$saveButton.addEventListener('click', showEntries);
 $entriesButton.addEventListener('click', showEntries);
 $entriesList.addEventListener('click', editEntry);
 $deleteButton.addEventListener('click', deleteEntry);
 $cancelButton.addEventListener('click', cancelModal);
-$submitButton.addEventListener('click', deleteEntry);
+$submitButton.addEventListener('click', confirmDelete);
