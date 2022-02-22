@@ -123,12 +123,14 @@ function showEntries(event) {
   data.editing = null;
 }
 
-function deleteEntry(event) {
-  $modalBackground.className = 'modal-background';
-}
-
 function cancelModal(event) {
   $modalBackground.className = 'modal-background hidden';
+}
+
+function deleteEntry(event) {
+  data.entries.shift();
+
+  showEntries();
 }
 
 if (data.view === 'entry-form') {
