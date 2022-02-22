@@ -21,23 +21,27 @@ function photoUpdate(event) {
 function submitForm(event) {
   event.preventDefault();
   var formInput = {};
+  formInput.entryId = data.nextEntryId;
   formInput.title = $title.value;
   formInput.photoURL = $photoURL.value;
   formInput.notes = $textArea.value;
-  formInput.nextEntryId = data.nextEntryId;
   data.nextEntryId++;
-  data.entries.unshift(formInput);
-  $img.setAttribute('src', 'images/images/placeholder-image-square.jpg');
-  $form.reset();
   $entriesList.prepend(renderEntry(formInput));
+  data.entries.unshift(formInput);
+  renderEntry(formInput);
+
+  if (data.editing !== null) {
+    var entryListElement = event.target.closest('li');
+    entryListElement.replaceWith(formInput);
+  }
 }
 
 function renderEntry(entry) {
-  var $unorderedList = document.createElement('ul');
+  var $entriesList = document.createElement('li');
 
   var $outerDiv = document.createElement('div');
   $outerDiv.className = 'row margin-top';
-  $unorderedList.appendChild($outerDiv);
+  $entriesList.appendChild($outerDiv);
 
   var $innerDiv = document.createElement('div');
   $innerDiv.className = 'column-half';
@@ -51,17 +55,48 @@ function renderEntry(entry) {
   $img.setAttribute('src', entry.photoURL);
   $innerDiv.appendChild($img);
 
+  var $rowHalf = document.createElement('div');
+  $rowHalf.className = 'row align-items';
+  $secondInnerDiv.appendChild($rowHalf);
+
   var $h2 = document.createElement('h2');
+  $h2.className = 'three-quarter-width';
   var $h2Text = document.createTextNode(entry.title);
+  var $editIcon = document.createElement('i');
+  $editIcon.className = 'fa-solid fa-pen-to-square margin-left cursor-pointer';
+
   var $p = document.createElement('p');
   $p.className = 'font-sans';
   var $pText = document.createTextNode(entry.notes);
   $h2.appendChild($h2Text);
   $p.appendChild($pText);
-  $secondInnerDiv.appendChild($h2);
+  $rowHalf.appendChild($h2);
+  $rowHalf.appendChild($editIcon);
   $secondInnerDiv.appendChild($p);
 
-  return $unorderedList;
+  $entriesList.setAttribute('data-entry-id', entry.nextEntryId);
+  return $entriesList;
+}
+
+function getEntry(entryList) {
+  var entryId = entryList.getAttribute('data-entry-id');
+  for (let i = 0; i < data.entries.length; i++) {
+    if (entryId === data.entries[i].nextEntryId.toString()) {
+      var entryObject = data.entries[i];
+      return entryObject;
+    }
+  }
+}
+
+function editEntry(event) { /* when you click on the edit button */
+  showEntryForm(); /* show the entry form */
+  var entryListElement = event.target.closest('li'); /* entryListElement = grabs the closeest li element which should be the one you selected since it's in the front of the entries */
+  var entryObject = getEntry(entryListElement); /* entryObject = the inputs as an object for the current input */
+  $title.value = entryObject.title; /* populate the title input with the title that's in the current li element */
+  $photoURL.value = entryObject.photoURL; /* populate the photoURL input with the photoURL that's in the current li element */
+  $img.setAttribute('src', entryObject.photoURL); /* set the image src to the photoURL in the li element; should show the picture */
+  $textArea.value = entryObject.notes; /* populate the textArea input with the textArea content that's in the current li element */
+  data.editing = entryListElement; /* set the editing property in our data model to the element */
 }
 
 function loadedDOMContent(event) {
@@ -74,12 +109,14 @@ function showEntryForm(event) {
   $entryForm.className = 'entry-form';
   $entries.className = 'hidden';
   data.view = 'entry-form';
+  data.editing = null;
 }
 
 function showEntries(event) {
   $entryForm.className = 'hidden';
   $entries.className = 'entries';
   data.view = 'entries';
+  data.editing = null;
 }
 
 if (data.view === 'entry-form') {
@@ -93,3 +130,4 @@ document.addEventListener('DOMContentLoaded', loadedDOMContent);
 $newButton.addEventListener('click', showEntryForm);
 $saveButton.addEventListener('click', showEntries);
 $entriesButton.addEventListener('click', showEntries);
+$entriesList.addEventListener('click', editEntry);

@@ -81,7 +81,7 @@ p {
 }
 
 .flex-row {
-  flex-direction: column;
+  flex-direction: row;
 }
 
 .half-width {
@@ -102,5 +102,13 @@ ul {
 }
 
 .margin-top {
-  margin-top: 2rem;
+  margin-top: 3rem;
+}
+
+.margin-left {
+  margin-left: 3.5rem;
+}
+
+.three-quarter-width {
+  width: 75%;
 }
