@@ -74,14 +74,14 @@ function renderEntry(entry) {
   $rowHalf.appendChild($editIcon);
   $secondInnerDiv.appendChild($p);
 
-  $entriesList.setAttribute('data-entry-id', entry.nextEntryId);
+  $entriesList.setAttribute('data-entry-id', entry.entryId);
   return $entriesList;
 }
 
 function getEntry(entryList) {
   var entryId = entryList.getAttribute('data-entry-id');
   for (let i = 0; i < data.entries.length; i++) {
-    if (entryId === data.entries[i].nextEntryId.toString()) {
+    if (entryId === data.entries[i].entryId.toString()) {
       var entryObject = data.entries[i];
       return entryObject;
     }
