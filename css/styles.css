@@ -65,24 +65,56 @@ a {
   text-decoration: underline;
 }
 
-.bg-modal {
-  width: 100%;
-  height: 100%;
-  background-color: rgb(0 0 0 / 80%);
+.modal-background {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(0 0 0 / 70%);
   position: absolute;
-  top: 0;
-  left: 0;
+  display: flex;
   justify-content: center;
   align-items: center;
-  display: none;
+  top: 0;
 }
 
-.modal-content {
-  height: 300px;
-  width: 600px;
-  background-color: pink;
+.modal-white-box {
+  width: 70%;
+  height: 8rem;
+  background-color: white;
   border-radius: 5px;
+}
+
+.modal-content-box {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+  height: 8rem;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0 10px;
+}
+
+.modal-row {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+}
+
+.modal-column {
+  width: 50%;
+  margin: auto;
+  text-align: center;
+}
+
+.cancel-button {
+  background-color: rgb(182, 182, 182);
+  border-radius: 5px;
+  border: none;
+  padding: 0.5rem 1rem;
+}
+
+.confirm-button {
+  background-color: rgb(226, 75, 71);
+  color: white;
+  border-radius: 5px;
+  border: none;
+  padding: 0.5rem 1rem;
 }

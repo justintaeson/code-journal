@@ -12,6 +12,10 @@ var $entryForm = document.querySelector('.entry-form');
 var $entries = document.querySelector('.entries');
 var $saveButton = document.querySelector('.save-button');
 var $entriesButton = document.querySelector('a');
+var $deleteButton = document.querySelector('.delete-button');
+var $cancelButton = document.querySelector('.cancel-button');
+var $submitButton = document.querySelector('.submit-button');
+var $modalBackground = document.querySelector('.modal-background');
 
 function photoUpdate(event) {
   var photoLink = event.target.value;
@@ -119,6 +123,14 @@ function showEntries(event) {
   data.editing = null;
 }
 
+function deleteEntry(event) {
+  $modalBackground.className = 'modal-background';
+}
+
+function cancelModal(event) {
+  $modalBackground.className = 'modal-background hidden';
+}
+
 if (data.view === 'entry-form') {
   showEntryForm();
 } else {
@@ -131,3 +143,6 @@ $newButton.addEventListener('click', showEntryForm);
 $saveButton.addEventListener('click', showEntries);
 $entriesButton.addEventListener('click', showEntries);
 $entriesList.addEventListener('click', editEntry);
+$deleteButton.addEventListener('click', deleteEntry);
+$cancelButton.addEventListener('click', cancelModal);
+$submitButton.addEventListener('click', deleteEntry);
