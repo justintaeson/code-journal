@@ -67,7 +67,7 @@ a {
 
 .modal-background {
   width: 100vw;
-  height: 100vh;
+  height: 60rem;
   background-color: rgb(0 0 0 / 70%);
   position: absolute;
   display: flex;
@@ -77,7 +77,7 @@ a {
 }
 
 .modal-white-box {
-  width: 70%;
+  width: 60%;
   height: 8rem;
   background-color: white;
   border-radius: 5px;
