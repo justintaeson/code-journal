@@ -178,10 +178,16 @@ $confirmButton.addEventListener('click', confirmDelete);
 
 function confirmDelete(event) {
   var entryElement = data.editing;
+  var entryID = entryElement.getAttribute('data-entry-id');
   entryElement.remove();
   showEntries();
-}
 
+  for (let i = 0; i < data.entries.length; i++) {
+    if (entryID === data.entries[0].entryId.toString()) {
+      data.entries.splice(i, 1);
+    }
+  }
+}
 if (data.view === 'entry-form') {
   showEntryForm();
 } else {
