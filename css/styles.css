@@ -63,6 +63,7 @@ a {
   border: none;
   color: red;
   text-decoration: underline;
+  font-size: small;
 }
 
 .modal-background {
@@ -117,4 +118,13 @@ a {
   border-radius: 5px;
   border: none;
   padding: 0.5rem 1rem;
+}
+
+.save-button {
+  color: white;
+  background-color: rgb(86, 43, 129);
+  border-radius: 5px;
+  border: none;
+  padding: 0.5rem 1rem;
+  width: 30%;
 }
